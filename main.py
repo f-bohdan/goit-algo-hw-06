@@ -33,7 +33,7 @@ class Record:
     def edit_phone(self, old_phone, new_phone):
         # перевірка чи введений номер телефону знаходиться в списку
         if old_phone not in [phone.value for phone in self.phones]:
-            print("Value error: Old phone not exist")
+            raise ValueError("Old phone not exist")
         else:
             # в іншому випадку проходимось по всіх елементах і змінюємо старий на новий
             self.phones = [phone if phone.value != old_phone else Phone(new_phone) for phone in self.phones]
