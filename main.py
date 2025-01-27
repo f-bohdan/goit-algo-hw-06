@@ -18,7 +18,7 @@ class Phone(Field):
         if len(value) == 10:
             self.value = value
         else:
-            self.value = '0000000000'
+            raise ValueError("Довжина номеру повинна = 10")
 
 class Record:
     def __init__(self, name):
