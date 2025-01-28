@@ -13,9 +13,7 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        # ШВИДШЕ ЗА ВСЕ ТУТ ПОМИЛКА 
-        # річ в тому я не знаю як діяти тут якщо довжина номеру телефону не відповідає нормі
-        if len(value) == 10:
+        if len(value) == 10 and value.isdigit():
             self.value = value
         else:
             raise ValueError("Довжина номеру повинна = 10")
@@ -44,6 +42,14 @@ class Record:
             if phone.value == find_phone:
                 return phone
         return None
+
+    def remove_phone(self, str_phone):
+        # перевірка чи введений номер телефону знаходиться в списку
+        if str_phone not in [phone.value for phone in self.phones]:
+            raise ValueError("Phone not exist")
+        else:
+            self.phones.remove(self.find_phone(str_phone))
+            
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
